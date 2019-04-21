@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\i348294\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\i348294\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_Yonded.-160039968.00" t="ExcludeRecursive" />
+    <e p="C:\Users\i348294\Desktop\Yonded" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="FarlandSkies" t="Include">
+          <e p="Demo" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Player" t="Include">
+                <e p="FPSWalkerEnhanced.cs" t="Include" />
+                <e p="SmoothMouseLook.cs" t="Include" />
+              </e>
+              <e p="Skybox" t="Include">
+                <e p="SkyboxChanger.cs" t="Include" />
+                <e p="SkyboxRotator.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="Config" t="Include">
+            <e p="BasePlatformConfig.cs" t="Include" />
+            <e p="GameConfig.cs" t="Include" />
+            <e p="RandomPlatformConfig.cs" t="Include" />
+          </e>
+          <e p="General" t="Include">
+            <e p="GameManager.cs" t="Include" />
+          </e>
+          <e p="Platforms" t="Include">
+            <e p="BasePlatform.cs" t="Include" />
+            <e p="BlackPlatform.cs" t="Include" />
+            <e p="GreenPlatform.cs" t="Include" />
+            <e p="PlatformSpawner.cs" t="Include" />
+            <e p="RedPlatform.cs" t="Include" />
+          </e>
+          <e p="Player" t="Include">
+            <e p="BetterJump.cs" t="Include" />
+            <e p="Player.cs" t="Include" />
+          </e>
+          <e p="UI" t="Include">
+            <e p="HUD.cs" t="Include" />
+            <e p="Menu.cs" t="Include" />
+            <e p="UI.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+      <e p="Yonded.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>
