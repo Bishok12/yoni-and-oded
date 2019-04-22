@@ -1,8 +1,14 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    [SerializeField] private Transform _light;
+    [SerializeField] private Transform _head;
+    [SerializeField] private Transform _torso;
+    [SerializeField] private Transform _legs;
+    [SerializeField] private Transform _scarf;
+    
     // Movement
     private float MoveSpeed;
     private float SpeedIncPerSec;
@@ -19,11 +25,26 @@ public class Player : MonoBehaviour
 
     // Time
     private float nextSpeedIncTime = 0.0f;
+
     public float period = 1.0f;
 
     private CharacterController _cc;
+
     private Vector3 _velocity;
 
+    protected virtual void Awake()
+    {
+        _cc = GetComponent<CharacterController>();
+    }
+
+    public void LoadSkin(SkinData skin)
+    {
+        _light.GetComponent<Light>().color = skin.LightColor;
+        _head.gameObject.SetActive(skin.ShowHead);
+        _torso.gameObject.SetActive(skin.ShowTorso);
+        _legs.gameObject.SetActive(skin.ShowLegs);
+        _scarf.gameObject.SetActive(skin.ShowScarf);
+    }
 
     public void Init(float initSpeed, float speedIncPerSec, float initJump, float maxJump, float gravityMult) {
         if (initJump > maxJump) {
@@ -53,11 +74,6 @@ public class Player : MonoBehaviour
         }
         Jump = Mathf.Min(MaxJump, (Jump * platformJumpMult));
     }
-
-    protected virtual void Awake()
-	{
-		_cc = GetComponent<CharacterController>();
-	}
 
     protected virtual void Update() 
     {

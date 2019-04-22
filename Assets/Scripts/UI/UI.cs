@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class UI : MonoBehaviour {
+public class UI : MonoBehaviour
+{
     public Menu Menu;
     public HUD HUD;
 
-    public void SetMenuMode(Menu.MenuType menuType) {
+    [SerializeField] private Text _moneyText;
+    [SerializeField] private Text _highScoreText;
+
+
+    public void SetMenuMode(Menu.MenuType menuType)
+    {
         Menu.gameObject.SetActive(true);
         Menu.Init(menuType);
 
@@ -12,11 +19,28 @@ public class UI : MonoBehaviour {
         HUD.DeInit();
     }
 
-    public void SetHUDMode() {
+    public void SetHUDMode()
+    {
         Menu.gameObject.SetActive(false);
         Menu.DeInit();
 
         HUD.gameObject.SetActive(true);
         HUD.Init();
+    }
+
+    public void SetMoneyText(int money)
+    {
+        _moneyText.text = "Money: " + money;
+    }
+
+    public void SetHighScoreText(float score)
+    {
+        _highScoreText.text = "HighScore: " + score.ToString("F2");
+    }
+
+    public void UpdateData(int money, float score)
+    {
+        SetMoneyText(money);
+        SetHighScoreText(score);
     }
 }

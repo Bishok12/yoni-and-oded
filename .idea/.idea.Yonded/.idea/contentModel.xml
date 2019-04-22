@@ -24,8 +24,11 @@
           <e p="Config" t="Include">
             <e p="BasePlatformConfig.cs" t="Include" />
             <e p="GameConfig.cs" t="Include" />
+            <e p="PlayerData.cs" t="Include" />
             <e p="RandomPlatformConfig.cs" t="Include" />
+            <e p="SkinData.cs" t="Include" />
           </e>
+          <e p="DataAccessService.cs" t="Include" />
           <e p="General" t="Include">
             <e p="GameManager.cs" t="Include" />
           </e>

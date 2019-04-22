@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
     public event Action<float> OnPlatformEnterEvent;
 
     // Singleton
@@ -10,48 +10,103 @@ public class GameManager : MonoBehaviour {
 
     // Properties
     public GameConfig _conf;
-   
+
     public float timePassed { get; private set; }
     public float highScore { get; private set; }
 
     private Player _player;
     private Camera _cam;
     private PlatformSpawner _platSpawner;
-
     private UI _ui;
     
+    [SerializeField] private DataAccessService _dataAccessService;
+    private int _money;
+    private int _selectedSkinId;
+    private float _highScore;
+
     // Use this for initialization
-    private void Awake () {
+    private void Awake()
+    {
         highScore = 0f;
         SetupSingleton();
+        SetDataAccessService();
+    }
+
+    private void Start()
+    {
         SetupUI();
     }
+
+    private void IncreaseMoney()
+    {
+        _money += 5;
+        _ui.SetMoneyText(_money);
+    }
+
+    private void SetDataAccessService()
+    {
+        _dataAccessService = Instantiate(_dataAccessService, transform);
+        _money = _dataAccessService.LoadMoney();
+        _highScore = _dataAccessService.LoadHighScore();
+    }
     
-    private void SetupSingleton() {
-        if (Instance != null) {
+    // Setup player
+    private void SetupPlayer()
+    {
+        _player = Instantiate(_conf.playerPrefab);
+        _player.LoadSkin(_dataAccessService.LoadSelectedSkin());
+        _player.Init(_conf.intialSpeed, _conf.speedIncPerSecond, _conf.initialJumpForce, _conf.maxJumpForce,
+            _conf.gravityMultiplyer);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    private void SetupSingleton()
+    {
+        if (Instance != null)
+        {
             throw new Exception("More than one singleton exists in the scene!");
         }
+
         Instance = this;
     }
+   
 
-    // Setup player
-    private void SetupPlayer() {
-        _player = Instantiate(_conf.playerPrefab);
-        _player.Init(_conf.intialSpeed, _conf.speedIncPerSecond, _conf.initialJumpForce, _conf.maxJumpForce, _conf.gravityMultiplyer);
-    }
 
     // Setup world
-    private void SetupWorld() {
+    private void SetupWorld()
+    {
         _platSpawner = Instantiate(_conf.platformSpawnerPrefab);
         _platSpawner.playerTransform = _player.transform;
     }
 
-    private void SetupUI() {
+    private void SetupUI()
+    {
         _ui = Instantiate(_conf.uiPrefab);
         _ui.SetMenuMode(Menu.MenuType.Start);
+        _ui.UpdateData(_money, _highScore);
     }
 
-    public void StartGame() {
+    public void StartGame()
+    {
         SetupPlayer();
         SetupWorld();
 
@@ -65,38 +120,49 @@ public class GameManager : MonoBehaviour {
         _ui.SetHUDMode();
     }
 
-    public void EndGame() {
+    public void EndGame()
+    {
         // Stop Spawner
         _platSpawner.OnPlatformEnterEvent -= OnPlatformEnter;
+
         _platSpawner.StopSpawning();
         _platSpawner.DestroyAll();
 
         // Save high score
         highScore = Mathf.Max(highScore, timePassed);
 
+        _ui.UpdateData(_money, _highScore);
         _ui.SetMenuMode(Menu.MenuType.End);
+        _dataAccessService.SaveData(highScore, _money, _selectedSkinId);
     }
 
-    private void OnPlatformEnter(float platformJumpMult) {
-        if (OnPlatformEnterEvent != null) {
+    private void OnPlatformEnter(float platformJumpMult)
+    {
+        if (OnPlatformEnterEvent != null)
+        {
             OnPlatformEnterEvent(platformJumpMult);
         }
+        
+        IncreaseMoney();
     }
 
     // Update is called once per frame
-    private void Update () {
+    private void Update()
+    {
         timePassed += Time.deltaTime;
         if (_platSpawner != null)
         {
             _platSpawner.spawnDistMargin = timePassed * 1.5f;
         }
-        
+
         //Debug.Log(_player.transform.position);
-        if (_player != null && _player.transform.position.y < (_conf.playerDeathHeight + _conf.platformMinVertDist)) {
+        if (_player != null && _player.transform.position.y < (_conf.playerDeathHeight + _conf.platformMinVertDist))
+        {
             _player.DeInit();
             Destroy(_player.gameObject);
             Destroy(_platSpawner.gameObject);
             EndGame();
         }
-	}
+    }
+    
 }
