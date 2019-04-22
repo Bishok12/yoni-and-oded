@@ -2,7 +2,6 @@
 
 public class Player : MonoBehaviour
 {
-
     [SerializeField] private Transform _light;
     [SerializeField] private Transform _head;
     [SerializeField] private Transform _torso;
