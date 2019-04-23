@@ -19,4 +19,4 @@ MonoBehaviour:
   ShowHead: 0
   ShowTorso: 0
   ShowLegs: 0
-  ShowScarf: 0
+  ShowScarf: 1

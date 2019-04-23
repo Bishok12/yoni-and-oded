@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 5
   Price: 200
-  Name: Just Head
+  Name: No Body
   LightColor: {r: 0.9935362, g: 1, b: 0.4481132, a: 0}
   ShowHead: 1
   ShowTorso: 0

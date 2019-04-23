@@ -5,13 +5,12 @@ using UnityEngine;
 public class DataAccessService : MonoBehaviour
 {
     [SerializeField] private PlayerData _playerData;
-    private List<SkinData> _skinsData;
+    public List<SkinData> SkinsData;
 
     private void Awake()
     {
-        _skinsData = new List<SkinData>();
-        _skinsData = Resources.LoadAll<SkinData>("Skins").ToList();
-        Debug.Log(_skinsData.Count);
+        SkinsData = new List<SkinData>();
+        SkinsData = Resources.LoadAll<SkinData>("Skins").ToList();
     }
 
     public void SaveData(float score, int money, int skinId)
@@ -21,6 +20,11 @@ public class DataAccessService : MonoBehaviour
         _playerData.SelectedSkin = GetSkinById(skinId);
     }
 
+    public void SaveMoney(int money)
+    {
+        _playerData.Money = money;
+    }
+    
     public float LoadHighScore()
     {
         return _playerData.HighScore;
@@ -39,13 +43,12 @@ public class DataAccessService : MonoBehaviour
         }
         
         SaveSkin(0);
-        return _skinsData[0];
+        return SkinsData[0];
     }
 
     public SkinData GetSkinById(int skinId)
     {
-        Debug.Log("Loading");
-        return _skinsData.Find(skin => skin.Id == skinId);
+        return SkinsData.Find(skin => skin.Id == skinId);
     }
 
     public void SaveSkin(int skinId)

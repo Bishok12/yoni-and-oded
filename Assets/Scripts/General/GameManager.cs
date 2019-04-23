@@ -41,6 +41,14 @@ public class GameManager : MonoBehaviour
     {
         _money += 5;
         _ui.SetMoneyText(_money);
+        _dataAccessService.SaveMoney(_money);
+    }
+    
+    public void DecreaseMoney(int amount)
+    {
+        _money -= amount;
+        _ui.SetMoneyText(_money);
+        _dataAccessService.SaveMoney(_money);
     }
 
     private void SetDataAccessService()
@@ -58,7 +66,16 @@ public class GameManager : MonoBehaviour
         _player.Init(_conf.intialSpeed, _conf.speedIncPerSecond, _conf.initialJumpForce, _conf.maxJumpForce,
             _conf.gravityMultiplyer);
     }
-    
+
+    public DataAccessService GetDataService()
+    {
+        return _dataAccessService;
+    }
+
+    public int GetMoney()
+    {
+        return _money;
+    }
     
     
     
