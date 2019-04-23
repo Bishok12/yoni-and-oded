@@ -76,25 +76,6 @@ public class GameManager : MonoBehaviour
     {
         return _money;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     private void SetupSingleton()
     {
